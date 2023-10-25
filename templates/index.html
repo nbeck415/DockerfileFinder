@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DockerfileFinder</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐳</text></svg>" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">DockerfileFinder 🐳</h1>
+        <p class="lead">Find GitHub repos with Dockerfiles and Compose files</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Filter by topic</h2>
+                <div class="dropdown">
+                    <select name="topics" id="topic">
+                    {% for topic in topics %}
+                        <option value="{{ topic }}">{{ topic }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
