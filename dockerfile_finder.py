@@ -14,7 +14,20 @@ def setup():
 
     auth = {'Authorization': f'Bearer {token}'}
     return auth
+
+def get_topics():
+    url = 'https://api.github.com/search/topics?q=is:featured'
+    response = requests.get(url)
     
+    if response.status_code == 200:
+        topics = response.json()
+        topic_names = []
+        for topic in topics['items']:
+            topic_names.append(topic['name'])
+        return topic_names
+    else:
+        print(f"Status code: {response.status_code}")
+        return []
 
 def find_dockerfile(auth):
     repo_addrs = []
@@ -40,11 +53,13 @@ def find_dockerfile(auth):
     else:
         print(f'Status code: {response.status_code}')
     return repo_addrs
-
+'''
 def main():
     auth = setup()
+    topics = get_topics()
     repos = find_dockerfile(auth)
-    print(repos)
+    print(topics)
 
 if __name__ == "__main__":
     main()
+'''
