@@ -6,6 +6,7 @@ pages = 10
 sort = 'stars'
 order = 'desc'
 per_page = 100
+topic = "hacktoberfest"
 target_filenames = ["Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml"]
 
 def setup():
@@ -29,9 +30,9 @@ def get_topics():
         print(f"Status code: {response.status_code}")
         return []
 
-def find_dockerfile(auth):
+def find_dockerfile(auth, stars=n_stars, topic=topic):
     repo_addrs = []
-    url = f'https://api.github.com/search/repositories?q=topic:hacktoberfest&sort={sort}&order={order}&per_page={per_page}&stars:>{n_stars}'
+    url = f'https://api.github.com/search/repositories?q=topic:{topic}&sort={sort}&order={order}&per_page={per_page}&stars:>{stars}'
     response = requests.get(url, headers=auth)
     if response.status_code == 200:
         data = response.json()
