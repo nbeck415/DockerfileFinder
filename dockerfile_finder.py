@@ -42,6 +42,8 @@ def find_dockerfile(auth, stars=n_stars, topic=cur_topic):
         for repo in popular_repos:
             name = repo['name']
             owner = repo['owner']['login']
+            desc = repo['description']
+            star_ct = repo['stargazers_count']
             repo_url = f'https://api.github.com/repos/{owner}/{name}/contents'
             headers = {'Authorization': auth['Authorization'], 'Accept': 'application/vnd.github.v3.raw'}
             contents = requests.get(repo_url, headers=headers)
@@ -49,7 +51,7 @@ def find_dockerfile(auth, stars=n_stars, topic=cur_topic):
             for item in repo_contents:
                 if item['name'] in target_filenames:
                     found_file = item['name']
-                    repo_addr = (owner, name)
+                    repo_addr = (owner, name, desc, star_ct)
                     if repo_addr not in repo_addrs:
                         repo_addrs.append(repo_addr)
                     print(f'{found_file} found in {owner}/{name}')

@@ -15,6 +15,9 @@ def search():
         print(request.form.get('num-stars'))
         print(request.form.get('topics'))
         repos = dff.find_dockerfile(auth, stars=request.form.get('num-stars'), topic=request.form.get('topics'))
+        print(len(repos))
+        if len(repos) == 0:
+            repos=-1
         return render_template('results.html', repos=repos)
     return render_template('results.html', repos=repos)
 
