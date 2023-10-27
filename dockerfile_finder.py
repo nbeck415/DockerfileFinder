@@ -1,12 +1,12 @@
 import requests, os
 from dotenv import load_dotenv
 
-n_stars = 100
+n_stars = 1000
 pages = 10
 sort = 'stars'
 order = 'desc'
 per_page = 100
-topic = "hacktoberfest"
+cur_topic = "hacktoberfest"
 target_filenames = ["Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml"]
 
 def setup():
@@ -17,7 +17,7 @@ def setup():
     return auth
 
 def get_topics():
-    url = 'https://api.github.com/search/topics?q=is:featured'
+    url = 'https://api.github.com/search/topics?q=language'
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -25,12 +25,14 @@ def get_topics():
         topic_names = []
         for topic in topics['items']:
             topic_names.append(topic['name'])
-        return topic_names
+        topic_names.remove("language")
+        topic_names.remove("programming-language")
+        return topic_names[:15]
     else:
         print(f"Status code: {response.status_code}")
         return []
 
-def find_dockerfile(auth, stars=n_stars, topic=topic):
+def find_dockerfile(auth, stars=n_stars, topic=cur_topic):
     repo_addrs = []
     url = f'https://api.github.com/search/repositories?q=topic:{topic}&sort={sort}&order={order}&per_page={per_page}&stars:>{stars}'
     response = requests.get(url, headers=auth)
