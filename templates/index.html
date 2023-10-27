@@ -14,18 +14,17 @@
         <p class="lead">Find GitHub repos with Dockerfiles and Docker Compose files</p>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-lg-6">
                 <form action="/search" method="POST">
                     <h4>Filter by topic</h4>
-                    <div class="dropdown">
-                        <select name="topics" id="topic">
+                    <select name="topics" id="topic">
                         {% for topic in topics %}
                             <option value="{{ topic }}">{{ topic }}</option>
                         {% endfor %}
-                        </select>
-                    </div>
+                    </select>
                     <br>
-                    <h4>Minimum repo stars ⭐️</h4>
+                    <br>
+                    <h4>Minimum stars ⭐️</h4>
                     <div class="num-stars">
                         <input type="number" id="num-stars" value="1000" name="num-stars" min="1" max="100000">
                     </div>
@@ -33,7 +32,7 @@
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-lg-6">
             </div>
         </div>
     </div>
