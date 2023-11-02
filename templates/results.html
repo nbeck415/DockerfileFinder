@@ -19,7 +19,7 @@
                     <h4>Sorry, no Dockerfiles found for the given parameters</h4>
                 {% else %}
                     {% for repo in repos %}
-                    <strong>{{ repo[3] }} ⭐️</strong>
+                    <strong>{{ repo[3] }} ⭐️ &nbsp; &nbsp; {{ repo[4] }} ⑂</strong>
                     <a href="https://github.com/{{ repo[0] }}/{{ repo[1] }}" target="_blank"><h4> {{ repo[0] }} / {{ repo[1] }}</h4> </a>
                     
                     <p>{{ repo[2] }}</p>
