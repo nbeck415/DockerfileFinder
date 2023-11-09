@@ -1,4 +1,4 @@
-import requests, os
+import requests, os, re
 from dotenv import load_dotenv
 
 n_stars = 1000
@@ -7,7 +7,9 @@ sort = 'stars'
 order = 'desc'
 per_page = 100
 cur_topic = "hacktoberfest"
-target_filenames = ["Dockerfile", "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml"]
+target_filenames = ["Dockerfile"]
+# match all compose files
+compose_regex = r'\bcompose\b.*\.(yml|yaml)'
 
 def setup():
     load_dotenv()
@@ -50,7 +52,7 @@ def find_dockerfile(auth, stars=n_stars, topic=cur_topic):
             contents = requests.get(repo_url, headers=headers)
             repo_contents = contents.json()
             for item in repo_contents:
-                if item['name'] in target_filenames:
+                if item['name'] in target_filenames or re.search(compose_regex, item['name']):
                     found_file = item['name']
                     repo_addr = (owner, name, desc, star_ct, fork_ct)
                     if repo_addr not in repo_addrs:
